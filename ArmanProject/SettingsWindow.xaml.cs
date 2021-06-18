@@ -22,6 +22,25 @@ namespace ArmanProject
         public SettingsWindow()
         {
             InitializeComponent();
+            defaultPath();
+        }
+
+        public void defaultPath() 
+        {
+            PathParam PathParam = new PathParam();
+            pathToFile.Text = PathParam.setReadFilePath();
         }
     }
+
+    public class PathParam 
+    {
+        public string setReadFilePath()
+        { 
+            string readFilePath = System.IO.Directory.GetCurrentDirectory();
+            return readFilePath;
+        }
+    }
+    
+
+    
 }
