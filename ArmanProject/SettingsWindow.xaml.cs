@@ -41,7 +41,20 @@ namespace ArmanProject
         
         public string FileDialogForm()
         {
-            string filename = null;
+            string fileName = null;
+            fileName = OpenFileDialogForm();
+            bool check = false;
+
+            while (check != true) 
+            {
+                check = checkExtension(fileName);
+            }
+            return fileName;
+        }
+
+        public string OpenFileDialogForm() 
+        {
+            string fileName = null;
             OpenFileDialog dialog = new OpenFileDialog()
             {
                 CheckFileExists = false,
@@ -52,9 +65,16 @@ namespace ArmanProject
 
             if (dialog.ShowDialog() == true)
             {
-                filename = dialog.FileName;
+                fileName = dialog.FileName;
             }
-            return filename;
+            return fileName;
+
+        }
+
+        public bool checkExtension(string name) 
+        {
+            bool check = name.Contains(".par");
+            return check;
         }
 
     }
