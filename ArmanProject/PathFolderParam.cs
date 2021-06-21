@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 
-
 namespace ArmanProject
 {
     class PathFolderParam : SettingsWindow
@@ -23,6 +22,20 @@ namespace ArmanProject
             FolderBrowserDialog FolderBrowserDialog = new FolderBrowserDialog();
             FolderBrowserDialog.ShowNewFolderButton = true;
             DialogResult result = FolderBrowserDialog.ShowDialog();
+       
+            if (result == System.Windows.Forms.DialogResult.OK) 
+            {
+                pathToFolder = FolderBrowserDialog.SelectedPath;
+            }
         }
+
+        public string getPath()
+        {
+            return pathToFolder;
+        }
+
+        private string pathToFolder;
+
+        public string PathToFolder { get => pathToFolder; set => pathToFolder = value; }
     }
 }

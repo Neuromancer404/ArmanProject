@@ -28,9 +28,9 @@ namespace ArmanProject
 
         private void selectFilePath_Click(object sender, RoutedEventArgs e)
         {
-            PathFolderParam PathFolderParam = new PathFolderParam();
-            PathFolderParam.ChooseFolder();
-
+            PathFolderParam _pathFolderParam = new PathFolderParam();
+            _pathFolderParam.ChooseFolder();
+            pathToFile.Text = _pathFolderParam.getPath();
         }
     }
 }
