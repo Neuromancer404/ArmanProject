@@ -28,57 +28,9 @@ namespace ArmanProject
 
         private void selectFilePath_Click(object sender, RoutedEventArgs e)
         {
-            PathParam PathParam = new PathParam();
-            pathToFile.Text = PathParam.FileDialogForm();
+            PathFolderParam PathFolderParam = new PathFolderParam();
+            PathFolderParam.ChooseFolder();
+
         }
     }
-
-    public class PathParam 
-    {
-
-            //string readFilePath = System.IO.Directory.GetCurrentDirectory();
-
-        
-        public string FileDialogForm()
-        {
-            string fileName = null;
-            fileName = OpenFileDialogForm();
-            bool check = false;
-
-            while (check != true) 
-            {
-                check = checkExtension(fileName);
-            }
-            return fileName;
-        }
-
-        public string OpenFileDialogForm() 
-        {
-            string fileName = null;
-            OpenFileDialog dialog = new OpenFileDialog()
-            {
-                CheckFileExists = false,
-                CheckPathExists = true,
-                Multiselect = false,
-                Title = "Выберите файл"
-            };
-
-            if (dialog.ShowDialog() == true)
-            {
-                fileName = dialog.FileName;
-            }
-            return fileName;
-
-        }
-
-        public bool checkExtension(string name) 
-        {
-            bool check = name.Contains(".par");
-            return check;
-        }
-
-    }
-    
-
-    
 }

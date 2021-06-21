@@ -9,7 +9,7 @@
     <Grid>
         <Label Content="Путь к файлу:" HorizontalAlignment="Left" Margin="15,10,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="20" Margin="98,10,0,0" TextWrapping="Wrap" Name="pathToFile" Text="" VerticalAlignment="Top" Width="350"/>
-        <Button Content="Выбрать" Name="selectFilePath" HorizontalAlignment="Left" Margin="453,13,0,0" VerticalAlignment="Top" Width="93" Click="selectFilePath_Click"/>
+        <Button Content="Найти" Name="selectFilePath" HorizontalAlignment="Left" Margin="453,13,0,0" VerticalAlignment="Top" Width="93" Click="selectFilePath_Click"/>
 
     </Grid>
 </Window>
