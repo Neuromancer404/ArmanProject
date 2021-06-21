@@ -22,11 +22,31 @@ namespace ArmanProject
             FolderBrowserDialog FolderBrowserDialog = new FolderBrowserDialog();
             FolderBrowserDialog.ShowNewFolderButton = true;
             DialogResult result = FolderBrowserDialog.ShowDialog();
-       
-            if (result == System.Windows.Forms.DialogResult.OK) 
+
+            if (result == System.Windows.Forms.DialogResult.OK && true == FileExtensionCheking(FolderBrowserDialog.SelectedPath))
             {
                 pathToFolder = FolderBrowserDialog.SelectedPath;
             }
+        }
+
+        private bool FileExtensionCheking(string path) 
+        {
+            string[] name = System.IO.Directory.GetFiles(path, "*.par");
+            bool result = false;
+            if (name.Length == 0)
+            {
+                System.Windows.Forms.MessageBox.Show(
+                "В выбранной папке отстутсвуют файлы с подходящим расширением (.par)",
+                "Ошибка",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error,
+                MessageBoxDefaultButton.Button1,
+                System.Windows.Forms.MessageBoxOptions.DefaultDesktopOnly);
+                
+
+            }
+            else result = true;
+            return result;
         }
 
         public string getPath()
