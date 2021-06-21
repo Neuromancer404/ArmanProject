@@ -13,7 +13,8 @@
         </Grid.ColumnDefinitions>
         <Label Content="Путь к файлу:" HorizontalAlignment="Left" Margin="15,5,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="20" Margin="98,10,0,0" TextWrapping="Wrap" Name="pathToFile" VerticalAlignment="Top" Width="350" Grid.ColumnSpan="2"/>
-        <Button Content="Найти" Name="selectFilePath" HorizontalAlignment="Left" Margin="134,10,0,0" Height="20" VerticalAlignment="Top" Width="93" Click="selectFilePath_Click" Grid.Column="1"/>
+        <Button Content="Просмотр" Name="selectFilePath" HorizontalAlignment="Left" Margin="134,10,0,0" Height="20" VerticalAlignment="Top" Width="93" Click="selectFilePath_Click" Grid.Column="1"/>
+        <Button Content="Применить" Name="useDirectory" HorizontalAlignment="Left" Margin="15,46,0,0" VerticalAlignment="Top" Width="75" Click="useDirectory_Click"/>
 
     </Grid>
 </Window>

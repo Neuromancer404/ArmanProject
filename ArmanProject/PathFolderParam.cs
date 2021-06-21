@@ -31,7 +31,8 @@ namespace ArmanProject
 
         private bool FileExtensionCheking(string path) 
         {
-            string[] name = System.IO.Directory.GetFiles(path, "*.par");
+
+            name = System.IO.Directory.GetFiles(path, "*.par");
             bool result = false;
             if (name.Length == 0)
             {
@@ -42,10 +43,11 @@ namespace ArmanProject
                 MessageBoxIcon.Error,
                 MessageBoxDefaultButton.Button1,
                 System.Windows.Forms.MessageBoxOptions.DefaultDesktopOnly);
-                
-
             }
-            else result = true;
+            else 
+            {
+                result = true;
+            };
             return result;
         }
 
@@ -56,6 +58,9 @@ namespace ArmanProject
 
         private string pathToFolder;
 
+        private string[] name;
+
         public string PathToFolder { get => pathToFolder; set => pathToFolder = value; }
+        public string[] Name1 { get => name; set => name = value; }
     }
 }

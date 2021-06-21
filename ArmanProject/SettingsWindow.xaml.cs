@@ -21,6 +21,8 @@ namespace ArmanProject
     /// </summary>
     public partial class SettingsWindow : Window
     {
+        private string pathDir = "";
+        private string pathFile = "";
         public SettingsWindow()
         {
             InitializeComponent();
@@ -30,7 +32,22 @@ namespace ArmanProject
         {
             PathFolderParam _pathFolderParam = new PathFolderParam();
             _pathFolderParam.ChooseFolder();
-            pathToFile.Text = _pathFolderParam.getPath();
+            pathDir = pathToFile.Text = _pathFolderParam.getPath();
+
+
+            //сделать цикл для нескольких файлов
+            foreach(string str in _pathFolderParam.Name1)
+            {
+                pathFile = str;
+                Console.WriteLine(str);
+            }
+        }
+
+        private void useDirectory_Click(object sender, RoutedEventArgs e)
+        {
+            
+            SubscriberData _subscriberData = new SubscriberData();
+            _subscriberData.LineRunner(pathFile);
         }
     }
 }
