@@ -19,25 +19,53 @@ namespace ArmanProject
         private bool value_visible;
 
         private List<string> LinesList = new List<string>() { };
-        private List<SubscriberData> _subscriberData = new List<SubscriberData> { };
+        //private List<SubscriberData> _subscriberData = new List<SubscriberData> { };
 
         public void LineRunner(string path) 
         {
             string[] lines = File.ReadAllLines(path);
 
-            SubName = lines[11];
-            //string[] parts = SubName.Split(':');
-            //Console.WriteLine(parts[1]);
-            int i = 0;
-
-            char[] separators = new char[] { ':', '.' };
-            foreach (var sub in SubName)
+            foreach(string par in lines)
             {
-                SubName = lines[i];
-                string[] parts = SubName.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-                Console.WriteLine(parts[0]);
-                i++;
+                if (par.Contains("par11"))
+                {
+                    getSub(par);
+                }
+                if(par.Contains("par24"))
+                {
+                    checkEvent(par);
+                }
             }
+        }
+
+        private void checkEvent(string parameterData)
+        {
+            if (parameterData.Contains("eventrecv"))
+            {
+                getEvent(parameterData);
+            }
+        }
+
+        private void getEvent(string par)
+        {
+            string[] container;
+            string readyLine;
+
+            container = par.Split('.', ':');
+            par = container[3];
+            readyLine = par.Replace( "\"", "");
+            
+            Console.WriteLine(readyLine);
+        }
+
+        private void getSub(string parameterData)
+        {
+            string[] container;
+            string a;
+
+            a = parameterData.Substring(3);
+            container = a.Split(':', '@');
+            parameterData = container[1];            
         }
     }
 
