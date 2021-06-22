@@ -21,8 +21,8 @@ namespace ArmanProject
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        private string pathDir = "";
-        private string pathFile = "";
+        public string pathDir = "";
+        string example;
         public SettingsWindow()
         {
             InitializeComponent();
@@ -32,22 +32,13 @@ namespace ArmanProject
         {
             PathFolderParam _pathFolderParam = new PathFolderParam();
             _pathFolderParam.ChooseFolder();
-            pathDir = pathToFile.Text = _pathFolderParam.getPath();
-
-
-            //сделать цикл для нескольких файлов
-            foreach(string str in _pathFolderParam.FilesName)
-            {
-                pathFile = str;
-                Console.WriteLine(str);
-            }
+            pathToFilePAR.Text =  pathDir = _pathFolderParam.getPath();
         }
 
-        private void useDirectory_Click(object sender, RoutedEventArgs e)
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            
-            //SubscriberData _subscriberData = new SubscriberData();
-            //_subscriberData.LineRunner(pathFile);
+            string a = File.ReadLines("ArmanProject.conf").First();
+            pathToFilePAR.Text = a;
         }
     }
 }

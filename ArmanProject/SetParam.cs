@@ -13,11 +13,13 @@ namespace ArmanProject
         private string currDir;
         public void SetData(string path) 
         {
+            
             if (check)
             {
                 using (StreamWriter sw = new StreamWriter(currDir + "ArmanProject.conf", true, System.Text.Encoding.Default))
                 {
                     sw.WriteLine(path);
+                    sw.Close();
                 }
             }
         }
@@ -26,7 +28,10 @@ namespace ArmanProject
         {
             currDir = Directory.GetCurrentDirectory();
 
-            if (!File.Exists(currDir + "ArmanProject.conf")) File.Create(currDir + "ArmanProject.conf");
+            if (!File.Exists(currDir + "ArmanProject.conf"))
+            {
+                File.Create(currDir + "ArmanProject.conf");
+            }
             else check = true;
         }
     }
