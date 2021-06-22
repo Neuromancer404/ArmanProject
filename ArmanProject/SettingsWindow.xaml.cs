@@ -36,7 +36,7 @@ namespace ArmanProject
 
 
             //сделать цикл для нескольких файлов
-            foreach(string str in _pathFolderParam.Name1)
+            foreach(string str in _pathFolderParam.FilesName)
             {
                 pathFile = str;
                 Console.WriteLine(str);
@@ -46,8 +46,8 @@ namespace ArmanProject
         private void useDirectory_Click(object sender, RoutedEventArgs e)
         {
             
-            SubscriberData _subscriberData = new SubscriberData();
-            _subscriberData.LineRunner(pathFile);
+            //SubscriberData _subscriberData = new SubscriberData();
+            //_subscriberData.LineRunner(pathFile);
         }
     }
 }

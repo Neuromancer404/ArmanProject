@@ -23,7 +23,7 @@ namespace ArmanProject
             FolderBrowserDialog.ShowNewFolderButton = true;
             DialogResult result = FolderBrowserDialog.ShowDialog();
 
-            if (result == System.Windows.Forms.DialogResult.OK && true == FileExtensionCheking(FolderBrowserDialog.SelectedPath))
+            if (result == System.Windows.Forms.DialogResult.OK && FileExtensionCheking(FolderBrowserDialog.SelectedPath))
             {
                 pathToFolder = FolderBrowserDialog.SelectedPath;
             }
@@ -61,6 +61,6 @@ namespace ArmanProject
         private string[] name;
 
         public string PathToFolder { get => pathToFolder; set => pathToFolder = value; }
-        public string[] Name1 { get => name; set => name = value; }
+        public string[] FilesName { get => name; set => name = value; }
     }
 }
