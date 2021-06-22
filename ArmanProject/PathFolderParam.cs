@@ -27,6 +27,9 @@ namespace ArmanProject
             {
                 pathToFolder = FolderBrowserDialog.SelectedPath;
             }
+            
+            SetParam setParam = new SetParam();
+            setParam.SetData(pathToFolder);
         }
 
         private bool FileExtensionCheking(string path) 

@@ -29,8 +29,6 @@ namespace ArmanProject
         public MainWindow()
         {
             InitializeComponent();
-
-
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
@@ -46,6 +44,9 @@ namespace ArmanProject
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            SetParam setParam = new SetParam();
+            setParam.checkConfFile();
+
             gData = new Dictionary<string, SubscriberData>();
 
             PathFolderParam pfp = new PathFolderParam();
