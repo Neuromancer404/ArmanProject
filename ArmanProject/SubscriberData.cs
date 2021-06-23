@@ -12,7 +12,6 @@ namespace ArmanProject
         public string MAC;
         public string IP;
         public string SubNumber;
-        public string EventNumber;
         public string SubName;
         public string Discript;
         public string value_key;

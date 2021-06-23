@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -56,8 +57,10 @@ namespace ArmanProject
                 return;
             }
 
-            atSatrt();
+            atStart();
         }
+
+        
 
         /// <summary>
         /// 
@@ -86,10 +89,27 @@ namespace ArmanProject
                 return;
             }
 
-            atSatrt();
+
+            //KeySelectionComboBox.ItemsSource = new BindingSource(gData.Keys, null);
+
+            atStart();
+            FormFilling("343_1_7");
+            foreach (KeyValuePair<string, SubscriberData> item in gData)
+            {
+                KeySelectionListBox.Items.Add(item.Key);
+            }
+        }
+        
+        private void FormFilling(string key)
+        {
+            SubNumLabel.Content = gData[key].SubNumber;
+            EventIdLabel.Content = gData[key].eventId;
+            KeyNumLabel.Content = gData[key].value_key;
+
+
         }
 
-        private void atSatrt()
+        private void atStart()
         {
             gData.Clear();
 
@@ -114,6 +134,7 @@ namespace ArmanProject
                 Console.WriteLine("Key = {0}, Value = {1}",
                     kvp.Key, kvp.Value.eventId);
             }
+            //comboBoxWriting();
         }
 
         public void parseFile(string path)
@@ -133,7 +154,7 @@ namespace ArmanProject
                     if (checkEvent(par, sd))
                     {
                         sd.SubNumber = sub;
-                        string key = sd.SubNumber + "_" + sd.eventId;
+                        string key = sd.SubNumber + "_" + sd.eventId + "_" + sd.value_key;
                         Console.WriteLine(key);
                         gData.Add(key, sd);
                     }
@@ -146,6 +167,7 @@ namespace ArmanProject
         {
             if (parameterData.Contains("eventrecv"))
             {
+                _subscriberData.value_key = getButton(parameterData);
                 _subscriberData.eventId = getEvent(parameterData);
                 return true;
             }
@@ -153,18 +175,36 @@ namespace ArmanProject
             return false;
         }
 
+        public string getButton(string par)
+        {
+            string str = par.Substring(6, par.Length - 6);
+            int a = str.IndexOf(":");
+            str = str.Substring(0, a);
+            Console.WriteLine("button number = {0}", str);
+
+            return str;
+        }
+
         private string getEvent(string par)
         {
-            string retVal = "";
             string[] container;
 
-            container = par.Split('.', ':');
-            par = container[3];
-            retVal = par.Replace("\"", "");
+            int b = par.IndexOf("\"");
+            string str = par.Substring(b+1);
 
-            Console.WriteLine(retVal);
+            b = str.IndexOf("\"");
+            str = str.Substring(0, b);
+            
 
-            return retVal;
+            container = str.Split('|', '&');
+            foreach(string str1 in container)
+            {
+                Console.WriteLine("events = {0}", str1);
+            }
+            Console.WriteLine("=============================");
+            
+            return container[0];
+
         }
 
         private string getSub(string parameterData)
@@ -175,6 +215,7 @@ namespace ArmanProject
 
             a = parameterData.Substring(3);
             container = a.Split(':', '@');
+
             retVal = container[1];
 
             Console.WriteLine("===={0}",retVal);
