@@ -32,13 +32,15 @@ namespace ArmanProject
         {
             PathFolderParam _pathFolderParam = new PathFolderParam();
             _pathFolderParam.ChooseFolder();
-            pathToFilePAR.Text =  pathDir = _pathFolderParam.getPath();
+            pathToFilePAR.Text = pathDir = _pathFolderParam.getPath();
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
+            return;
             string a = File.ReadLines("ArmanProject.conf").First();
             pathToFilePAR.Text = a;
         }
     }
+
 }

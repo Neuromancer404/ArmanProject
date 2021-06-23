@@ -44,6 +44,7 @@ namespace ArmanProject
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            return;
             SetParam setParam = new SetParam();
             setParam.checkConfFile();
 
@@ -66,6 +67,7 @@ namespace ArmanProject
                     kvp.Key, kvp.Value.eventId);
             }
         }
+
 
         public void parseFile(string path)
         {
