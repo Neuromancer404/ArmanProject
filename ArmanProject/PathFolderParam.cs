@@ -15,7 +15,7 @@ using Microsoft.Win32;
 
 namespace ArmanProject
 {
-    class PathFolderParam : SettingsWindow
+    class PathFolderParam
     {
         public void ChooseFolder()
         {
@@ -32,11 +32,9 @@ namespace ArmanProject
             setParam.SetData(pathToFolder);
         }
 
-        private bool FileExtensionCheking(string path) 
+        public bool FileExtensionCheking(string path) 
         {
-
             name = System.IO.Directory.GetFiles(path, "*.par");
-            bool result = false;
             if (name.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show(
@@ -46,12 +44,18 @@ namespace ArmanProject
                 MessageBoxIcon.Error,
                 MessageBoxDefaultButton.Button1,
                 System.Windows.Forms.MessageBoxOptions.DefaultDesktopOnly);
+
+                return true;
             }
-            else 
+
+            Console.WriteLine("-------------------------------------");
+            foreach (string str in name)
             {
-                result = true;
-            };
-            return result;
+                Console.WriteLine(str);
+            }
+            Console.WriteLine("*************************************");
+
+            return false;
         }
 
         public string getPath()

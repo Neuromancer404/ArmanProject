@@ -21,20 +21,42 @@ namespace ArmanProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        /// <summary>
-        /// 
-        /// </summary>
+        private string pathToExe;
+        private string pathToConfFile;
+        private string pathToParameterFilesFolder;
+        private string pathToJsonFile;
         private Dictionary<string, SubscriberData> gData;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            pathToExe = Directory.GetCurrentDirectory();
+            pathToConfFile = pathToExe + "\\ArmanProject.conf";
+
+            gData = new Dictionary<string, SubscriberData>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            SettingsWindow settingsWindow = new SettingsWindow();
-            settingsWindow.Show();
+            SettingsWindow settingsWindow = new SettingsWindow(pathToConfFile);
+            settingsWindow.ShowDialog();
+
+            pathToParameterFilesFolder = settingsWindow.PathToParametersFolder;
+            pathToJsonFile = settingsWindow.PathToJsonFile;
+
+            if(pathToParameterFilesFolder.Length == 0 || pathToJsonFile.Length == 0)
+            {
+                Console.WriteLine("Error in path's: pathToParameterFilesFolder={0}, pathToJsonFile={1}", pathToParameterFilesFolder, pathToJsonFile);
+                return;
+            }
+
+            atSatrt();
         }
 
         /// <summary>
@@ -44,21 +66,48 @@ namespace ArmanProject
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            SetParam setParam = new SetParam();
-            setParam.checkConfFile();
+            if (!File.Exists(pathToConfFile))
+            {
+                Console.WriteLine("Error ArmanProject.conf dosent exist");
+                return;
+            }
+            string[] lines = File.ReadAllLines(pathToConfFile);
+            if (lines.Length >= 1)
+            {
+                pathToParameterFilesFolder = lines[0];
+            }
+            if (lines.Length >= 2)
+            {
+                pathToJsonFile = lines[1];
+            }
+            if (pathToParameterFilesFolder.Length == 0 || pathToJsonFile.Length == 0)
+            {
+                Console.WriteLine("Error in path's");
+                return;
+            }
 
-            gData = new Dictionary<string, SubscriberData>();
+            atSatrt();
+        }
+
+        private void atSatrt()
+        {
+            gData.Clear();
+
+            Console.WriteLine("atStart starting");
 
             PathFolderParam pfp = new PathFolderParam();
-            pfp.ChooseFolder();
+            if (pfp.FileExtensionCheking(pathToParameterFilesFolder))
+            {
+                Console.WriteLine("Error no .par in {0}", pathToParameterFilesFolder);
+                return;
+            }
 
             string[] filesName = pfp.FilesName;
 
-            foreach(string pathToFile in filesName)
+            foreach (string pathToFile in filesName)
             {
                 parseFile(pathToFile);
             }
-
 
             foreach (KeyValuePair<string, SubscriberData> kvp in gData)
             {
@@ -66,7 +115,6 @@ namespace ArmanProject
                     kvp.Key, kvp.Value.eventId);
             }
         }
-
 
         public void parseFile(string path)
         {

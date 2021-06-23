@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArmanProject"
         mc:Ignorable="d"
-        Title="SettingsWindow" Height="450" Width="575">
-    <Grid Loaded="Grid_Loaded">
+        Title="SettingsWindow" Height="450" Width="575" Closing="Window_Closing">
+    <Grid Loaded="Grid_Loaded" Margin="0,0,0,339">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="332*"/>
             <ColumnDefinition Width="237*"/>
@@ -16,7 +16,7 @@
         <Button Content="Просмотр" Name="selectFilePath" HorizontalAlignment="Left" Margin="134,9,0,0" Height="22" VerticalAlignment="Top" Width="93" Click="selectFilePath_Click" Grid.Column="1" RenderTransformOrigin="0.557,0.476"/>
         <Label Content="Директория с файлами .json:" HorizontalAlignment="Left" Margin="15,36,0,0" VerticalAlignment="Top" Width="168"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="186,39,0,0" TextWrapping="Wrap" Text="" Name="pathToFileJSON" VerticalAlignment="Top" Width="265" Grid.ColumnSpan="2"/>
-        <Button Content="Просмотр" Grid.Column="1" HorizontalAlignment="Left" Margin="134,38,0,0" VerticalAlignment="Top" Height="22" Width="93"/>
+        <Button Content="Просмотр" Grid.Column="1" HorizontalAlignment="Left" Margin="134,38,0,0" VerticalAlignment="Top" Height="22" Width="93" Click="Button_Click"/>
 
     </Grid>
 </Window>
