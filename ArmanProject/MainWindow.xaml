@@ -5,31 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArmanProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
-    <Grid>
+        Title="MainWindow" Height="380.4" Width="386" Loaded="Window_Loaded">
+    <Grid Margin="0,0,3.2,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="354*"/>
-            <ColumnDefinition Width="439*"/>
+            <ColumnDefinition Width="750*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Настройки" Name="SettingsButton" HorizontalAlignment="Left" Margin="312.638,10,0,0" VerticalAlignment="Top" Width="117" Height="23" Click="SettingsButton_Click" Grid.Column="1"/>
-        <Label Content="Выберите ключ:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <ListBox Name ="KeySelectionListBox" HorizontalAlignment="Left" Height="369" Margin="10,41,0,0" VerticalAlignment="Top" Width="99"/>
-        <Label Content="Номер абонента:" HorizontalAlignment="Left" Margin="127,41,0,0" VerticalAlignment="Top"/>
-        <Label Content="" Name ="SubNumLabel"  HorizontalAlignment="Left" Margin="236,41,0,0" VerticalAlignment="Top"/>
-        <Label Content="id события:" HorizontalAlignment="Left" Margin="130,72,0,0" VerticalAlignment="Top"/>
-        <Label Content="" Name="EventIdLabel" HorizontalAlignment="Left" Margin="236,72,0,0" VerticalAlignment="Top"/>
-        <Label Content="Номер кнопки:"  HorizontalAlignment="Left" Margin="127,103,0,0" VerticalAlignment="Top"/>
-        <Label Content="" Name="KeyNumLabel" HorizontalAlignment="Left" Margin="236,103,0,0" VerticalAlignment="Top"/>
-        <Label Content="Имя абонента:" HorizontalAlignment="Left" Margin="127,134,0,0" VerticalAlignment="Top"/>
-        <TextBox Name ="SubNameTextBox" HorizontalAlignment="Left" Height="23" Margin="224,137,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Описание: " HorizontalAlignment="Left" Margin="127,165,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="DiscriptTextBox" HorizontalAlignment="Left" Height="23" Margin="224,168,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Видимость: " HorizontalAlignment="Left" Margin="127,196,0,0" VerticalAlignment="Top"/>
-        <Label Content="MAC:" HorizontalAlignment="Left" Margin="141,227,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="MacTextBox" HorizontalAlignment="Left" Height="23" Margin="224,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label Content="IP:" HorizontalAlignment="Left" Margin="141,258,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="IpTextBox"  HorizontalAlignment="Left" Height="23" Margin="224,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <ComboBox HorizontalAlignment="Left" Margin="224,199,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Выбор директории" Name="SettingsButton" HorizontalAlignment="Left" Margin="164,314,0,0" VerticalAlignment="Top" Width="117" Height="23" Click="SettingsButton_Click"/>
+        <Label Content="Выберите ключ:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="99"/>
+        <ListBox Name ="KeySelectionListBox" HorizontalAlignment="Left" Height="296" Margin="10,41,0,0" VerticalAlignment="Top" Width="99" SelectionChanged="KeySelectionListBox_SelectionChanged"/>
+        <Label Content="Номер абонента:" HorizontalAlignment="Left" Margin="127,41,0,0" VerticalAlignment="Top" Height="26" Width="104"/>
+        <Label Content="" Name ="SubNumLabel"  HorizontalAlignment="Left" Margin="236,41,0,0" VerticalAlignment="Top" Height="26" Width="108"/>
+        <Label Content="id события:" HorizontalAlignment="Left" Margin="130,72,0,0" VerticalAlignment="Top" Height="26" Width="72"/>
+        <Label Content="" Name="EventIdLabel" HorizontalAlignment="Left" Margin="236,72,0,0" VerticalAlignment="Top" Height="26" Width="105"/>
+        <Label Content="Номер кнопки:"  HorizontalAlignment="Left" Margin="127,103,0,0" VerticalAlignment="Top" Height="26" Width="93"/>
+        <Label Content="" Name="KeyNumLabel" HorizontalAlignment="Left" Margin="236,103,0,0" VerticalAlignment="Top" Height="26" Width="108"/>
+        <Label Content="Имя абонента:" HorizontalAlignment="Left" Margin="127,134,0,0" VerticalAlignment="Top" Height="26" Width="91"/>
+        <TextBox Name ="SubNameTextBox" HorizontalAlignment="Left" Height="23" Margin="236,137,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="108"/>
+        <Label Content="Описание: " HorizontalAlignment="Left" Margin="127,165,0,0" VerticalAlignment="Top" Height="26" Width="70"/>
+        <TextBox Name="DiscriptTextBox" HorizontalAlignment="Left" Height="23" Margin="236,168,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="108"/>
+        <Label Content="Видимость: " HorizontalAlignment="Left" Margin="127,196,0,0" VerticalAlignment="Top" Height="26" Width="75"/>
+        <Label Content="MAC:" HorizontalAlignment="Left" Margin="141,227,0,0" VerticalAlignment="Top" Height="26" Width="38"/>
+        <TextBox Name="MacTextBox" HorizontalAlignment="Left" Height="23" Margin="236,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="108"/>
+        <Label Content="IP:" HorizontalAlignment="Left" Margin="141,258,0,0" VerticalAlignment="Top" Height="26" Width="22"/>
+        <TextBox Name="IpTextBox"  HorizontalAlignment="Left" Height="23" Margin="236,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="108"/>
+        <CheckBox Name ="ValueVisibleCheckBox"  Content="" HorizontalAlignment="Left" Margin="236,203,0,0" VerticalAlignment="Top" Height="15" Width="18"/>
 
     </Grid>
 </Window>

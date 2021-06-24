@@ -51,7 +51,7 @@ namespace ArmanProject
             pathToParameterFilesFolder = settingsWindow.PathToParametersFolder;
             pathToJsonFile = settingsWindow.PathToJsonFile;
 
-            if(pathToParameterFilesFolder.Length == 0 || pathToJsonFile.Length == 0)
+            if (pathToParameterFilesFolder.Length == 0 || pathToJsonFile.Length == 0)
             {
                 Console.WriteLine("Error in path's: pathToParameterFilesFolder={0}, pathToJsonFile={1}", pathToParameterFilesFolder, pathToJsonFile);
                 return;
@@ -60,10 +60,13 @@ namespace ArmanProject
             atStart();
         }
 
-        
+
 
         /// <summary>
-        /// 
+        /// Проверка наличия конфигурационного файла
+        /// Проверка записей в конф. файле
+        /// Первая зпапись - путь к директории с .par файлами
+        /// Вторая запись - путь к json файлам
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -89,40 +92,50 @@ namespace ArmanProject
                 return;
             }
 
-
-            //KeySelectionComboBox.ItemsSource = new BindingSource(gData.Keys, null);
-
             atStart();
-            FormFilling("343_1_7");
+        }
+
+
+        private void ListBoxFilling() 
+        {
             foreach (KeyValuePair<string, SubscriberData> item in gData)
             {
                 KeySelectionListBox.Items.Add(item.Key);
+                Console.WriteLine("--------Listbox fill-----------");
+                Console.WriteLine("{0}", item.Key);
             }
         }
+
         
+        /// <summary>
+        /// Принимает ключ из ListBox и отображает данные по этому ключу на форме 
+        /// </summary>
+        /// <param name="key"></param>
         private void FormFilling(string key)
         {
             SubNumLabel.Content = gData[key].SubNumber;
             EventIdLabel.Content = gData[key].eventId;
             KeyNumLabel.Content = gData[key].value_key;
-
-
+            SubNameTextBox.Text = gData[key].SubName;
+            DiscriptTextBox.Text = gData[key].Discript;
+            MacTextBox.Text = gData[key].MAC;
+            IpTextBox.Text = gData[key].IP;
+            ValueVisibleCheckBox.IsChecked = gData[key].value_visible;
+            Console.WriteLine("gData value writing");
         }
 
         private void atStart()
         {
-            gData.Clear();
-
             Console.WriteLine("atStart starting");
 
-            PathFolderParam pfp = new PathFolderParam();
-            if (pfp.FileExtensionCheking(pathToParameterFilesFolder))
+            string[] filesName = FileExtensionCheking(pathToParameterFilesFolder);
+            if (filesName.Length == 0)
             {
-                Console.WriteLine("Error no .par in {0}", pathToParameterFilesFolder);
+                Console.WriteLine("Error: no .par in {0}", pathToParameterFilesFolder);
                 return;
             }
 
-            string[] filesName = pfp.FilesName;
+            gData.Clear();
 
             foreach (string pathToFile in filesName)
             {
@@ -131,10 +144,17 @@ namespace ArmanProject
 
             foreach (KeyValuePair<string, SubscriberData> kvp in gData)
             {
-                Console.WriteLine("Key = {0}, Value = {1}",
-                    kvp.Key, kvp.Value.eventId);
+                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value.eventId);
             }
-            //comboBoxWriting();
+
+            ListBoxFilling();
+        }
+
+        private string[] FileExtensionCheking(string path)
+        {
+            string[] pathToParFiles = System.IO.Directory.GetFiles(path, "*.par");
+
+            return pathToParFiles;
         }
 
         public void parseFile(string path)
@@ -221,6 +241,15 @@ namespace ArmanProject
             Console.WriteLine("===={0}",retVal);
 
             return retVal;
+        }
+        /// <summary>
+        /// При выборе значения из ListBox вызывает метод заполнения формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void KeySelectionListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FormFilling(KeySelectionListBox.SelectedItem.ToString());
         }
     }
 }

@@ -30,13 +30,13 @@ namespace ArmanProject
         public string PathToJsonFile { get => pathToJsonFile; set => pathToJsonFile = value; }
         
         /// <summary>
-        /// Запуск окна настроек
+        /// Конструктор окна настроек
+        /// Выводит в TextBox пути к  файлам
         /// </summary>
         /// <param name="_pathToConfFile">Путь к файлу настроек</param>
         public SettingsWindow(string _pathToConfFile)
         {
             InitializeComponent();
-
 
             pathToConfFile = _pathToConfFile;
             pathToParameterFilesFolder = "";
@@ -59,6 +59,17 @@ namespace ArmanProject
         {
             pathToParameterFilesFolder = getPath();
             pathToFilePAR.Text = pathToParameterFilesFolder;
+
+            string[] name = System.IO.Directory.GetFiles(pathToParameterFilesFolder, "*.par");
+            if (name.Length == 0)
+            {
+                System.Windows.Forms.MessageBox.Show("В выбранной папке отстутсвуют файлы с подходящим расширением (.par)",
+                                                "Ошибка",
+                                                MessageBoxButtons.OK,
+                                                MessageBoxIcon.Error,
+                                                MessageBoxDefaultButton.Button1,
+                                                System.Windows.Forms.MessageBoxOptions.DefaultDesktopOnly);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

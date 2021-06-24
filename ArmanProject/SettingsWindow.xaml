@@ -5,18 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArmanProject"
         mc:Ignorable="d"
-        Title="SettingsWindow" Height="450" Width="575" Closing="Window_Closing">
-    <Grid Loaded="Grid_Loaded" Margin="0,0,0,339">
+        Title="SettingsWindow" Height="145.26" Width="575" Closing="Window_Closing">
+    <Grid Loaded="Grid_Loaded" Margin="0,0,-0.2,-19">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="332*"/>
             <ColumnDefinition Width="237*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Директория с файлами .par:" HorizontalAlignment="Left" Margin="15,5,0,0" VerticalAlignment="Top" Width="165"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="186,10,0,0" TextWrapping="Wrap" Name="pathToFilePAR" VerticalAlignment="Top" Width="265" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Left" Height="39" Margin="186,10,0,0" TextWrapping="Wrap" Name="pathToFilePAR" VerticalAlignment="Top" Width="265" Grid.ColumnSpan="2"/>
         <Button Content="Просмотр" Name="selectFilePath" HorizontalAlignment="Left" Margin="134,9,0,0" Height="22" VerticalAlignment="Top" Width="93" Click="selectFilePath_Click" Grid.Column="1" RenderTransformOrigin="0.557,0.476"/>
-        <Label Content="Директория с файлами .json:" HorizontalAlignment="Left" Margin="15,36,0,0" VerticalAlignment="Top" Width="168"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="186,39,0,0" TextWrapping="Wrap" Text="" Name="pathToFileJSON" VerticalAlignment="Top" Width="265" Grid.ColumnSpan="2"/>
-        <Button Content="Просмотр" Grid.Column="1" HorizontalAlignment="Left" Margin="134,38,0,0" VerticalAlignment="Top" Height="22" Width="93" Click="Button_Click"/>
+        <Label Content="Директория с файлом .json:" HorizontalAlignment="Left" Margin="15,62,0,0" VerticalAlignment="Top" Width="168"/>
+        <TextBox HorizontalAlignment="Left" Height="39" Margin="185,66,0,0" TextWrapping="Wrap" Text="" Name="pathToFileJSON" VerticalAlignment="Top" Width="265" Grid.ColumnSpan="2"/>
+        <Button Content="Просмотр" Grid.Column="1" HorizontalAlignment="Left" Margin="134,66,0,0" VerticalAlignment="Top" Height="22" Width="93" Click="Button_Click"/>
 
     </Grid>
 </Window>
