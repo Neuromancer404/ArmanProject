@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Windows.Controls;
 
 namespace ArmanProject
 {
-    public partial class SettingsWindow
+    public partial class MainWindow
     {
+        /// <summary>
+        /// Заполнение Listbox на форме
+        /// </summary>
         private void ListBoxFilling()
         {
             foreach (KeyValuePair<string, SubscriberData> item in gData)
@@ -15,6 +20,11 @@ namespace ArmanProject
             }
         }
 
+
+        /// <summary>
+        /// Вывод на форму значений из словаря gData
+        /// </summary>
+        /// <param name="key"></param>
         private void FormFilling(string key)
         {
             SubNumLabel.Content = gData[key].SubNumber;
@@ -22,12 +32,14 @@ namespace ArmanProject
             KeyNumLabel.Content = gData[key].value_key;
             SubNameTextBox.Text = gData[key].SubName;
             DiscriptTextBox.Text = gData[key].Discript;
-            MacTextBox.Text = gData[key].MAC;
-            IpTextBox.Text = gData[key].IP;
             ValueVisibleCheckBox.IsChecked = gData[key].value_visible;
             Console.WriteLine("gData value writing");
         }
 
+
+        /// <summary>
+        ///  
+        /// </summary>
         private void atStart()
         {
             Console.WriteLine("atStart starting");
@@ -147,15 +159,5 @@ namespace ArmanProject
 
             return retVal;
         }
-        /// <summary>
-        /// При выборе значения из ListBox вызывает метод заполнения формы
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void KeySelectionListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            FormFilling(KeySelectionListBox.SelectedItem.ToString());
-        }
-
     }
 }

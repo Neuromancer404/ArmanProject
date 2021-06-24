@@ -46,8 +46,6 @@ namespace ArmanProject
         /// <param name="e"></param>
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            //ActiveSelect = KeySelectionListBox.SelectedIndex;
-
             SettingsWindow settingsWindow = new SettingsWindow(pathToConfFile);
             settingsWindow.ShowDialog();
 
@@ -59,7 +57,7 @@ namespace ArmanProject
                 Console.WriteLine("Error in path's: pathToParameterFilesFolder={0}, pathToJsonFile={1}", pathToParameterFilesFolder, pathToJsonFile);
                 return;
             }
-
+            KeySelectionListBox.Items.Clear();
             atStart();
             SetListBoxSelect();
         }
