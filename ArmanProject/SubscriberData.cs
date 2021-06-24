@@ -9,8 +9,6 @@ namespace ArmanProject
 {
     class SubscriberData
     {
-        public string MAC;
-        public string IP;
         public string SubNumber;
         public string SubName;
         public string Discript;

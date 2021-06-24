@@ -23,14 +23,10 @@
         <Label Content="Номер кнопки:"  HorizontalAlignment="Left" Margin="127,103,0,0" VerticalAlignment="Top" Height="26" Width="93"/>
         <Label Content="" Name="KeyNumLabel" HorizontalAlignment="Left" Margin="236,103,0,0" VerticalAlignment="Top" Height="26" Width="108"/>
         <Label Content="Имя абонента:" HorizontalAlignment="Left" Margin="127,134,0,0" VerticalAlignment="Top" Height="26" Width="91"/>
-        <TextBox Name ="SubNameTextBox" HorizontalAlignment="Left" Height="23" Margin="236,137,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="108"/>
+        <TextBox Name ="SubNameTextBox" HorizontalAlignment="Left" Height="23" Margin="236,137,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="108" TextChanged="SubNameTextBox_TextChanged"/>
         <Label Content="Описание: " HorizontalAlignment="Left" Margin="127,165,0,0" VerticalAlignment="Top" Height="26" Width="70"/>
-        <TextBox Name="DiscriptTextBox" HorizontalAlignment="Left" Height="23" Margin="236,168,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="108"/>
+        <TextBox Name="DiscriptTextBox" HorizontalAlignment="Left" Height="23" Margin="236,168,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="108" TextChanged="DiscriptTextBox_TextChanged"/>
         <Label Content="Видимость: " HorizontalAlignment="Left" Margin="127,196,0,0" VerticalAlignment="Top" Height="26" Width="75"/>
-        <Label Content="MAC:" HorizontalAlignment="Left" Margin="141,227,0,0" VerticalAlignment="Top" Height="26" Width="38"/>
-        <TextBox Name="MacTextBox" HorizontalAlignment="Left" Height="23" Margin="236,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="108"/>
-        <Label Content="IP:" HorizontalAlignment="Left" Margin="141,258,0,0" VerticalAlignment="Top" Height="26" Width="22"/>
-        <TextBox Name="IpTextBox"  HorizontalAlignment="Left" Height="23" Margin="236,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="108"/>
         <CheckBox Name ="ValueVisibleCheckBox"  Content="" HorizontalAlignment="Left" Margin="236,203,0,0" VerticalAlignment="Top" Height="15" Width="18"/>
 
     </Grid>
