@@ -55,6 +55,12 @@ namespace ArmanProject
             }
         }
 
+
+        /// <summary>
+        /// Проверка файлов в выбранной директории на наличие .par файла
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void selectFilePath_Click(object sender, RoutedEventArgs e)
         {
             pathToParameterFilesFolder = getPath();
@@ -63,15 +69,22 @@ namespace ArmanProject
             string[] name = System.IO.Directory.GetFiles(pathToParameterFilesFolder, "*.par");
             if (name.Length == 0)
             {
-                System.Windows.Forms.MessageBox.Show("В выбранной папке отстутсвуют файлы с подходящим расширением (.par)",
-                                                "Ошибка",
-                                                MessageBoxButtons.OK,
-                                                MessageBoxIcon.Error,
-                                                MessageBoxDefaultButton.Button1,
-                                                System.Windows.Forms.MessageBoxOptions.DefaultDesktopOnly);
+                System.Windows.Forms.MessageBox.Show(
+                    "В выбранной папке отстутсвуют файлы с подходящим расширением (.par)",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1,
+                    System.Windows.Forms.MessageBoxOptions.DefaultDesktopOnly);
             }
         }
 
+
+        /// <summary>
+        /// Устанавливается путь к json файлу
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             pathToJsonFile = getPath() + "\\eventsConfig.json";
@@ -79,6 +92,12 @@ namespace ArmanProject
             pathToFileJSON.Text = pathToJsonFile;
         }
 
+
+        /// <summary>
+        /// Проверка записи путей к .par и .json и запись из в конфигурационный файл
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if(pathToParameterFilesFolder.Length == 0 || pathToJsonFile.Length == 0)
@@ -94,12 +113,12 @@ namespace ArmanProject
             }
         }
 
+
         private string getPath()
         {
-            FolderBrowserDialog FolderBrowserDialog = new FolderBrowserDialog();
-            FolderBrowserDialog.ShowNewFolderButton = true;
-            DialogResult result = FolderBrowserDialog.ShowDialog();
-            return FolderBrowserDialog.SelectedPath;
+            FolderBrowserDialog _folderBrowserDialog = new FolderBrowserDialog();
+            _folderBrowserDialog.ShowNewFolderButton = true;
+            return _folderBrowserDialog.SelectedPath;
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)

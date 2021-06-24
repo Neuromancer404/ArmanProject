@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -70,6 +71,7 @@ namespace ArmanProject
             if (KeySelectionListBox.Items.Count > 0)
             {
                 KeySelectionListBox.SelectedIndex = 0;
+
             }
         }
 
@@ -101,6 +103,8 @@ namespace ArmanProject
             }
             atStart();
             SetListBoxSelect();
+
+
         }
 
         /*========== Entering Data in form ==========*/
@@ -119,6 +123,12 @@ namespace ArmanProject
             }
         }
 
+
+        /// <summary>
+        /// Обработка заполнения описания
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DiscriptTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (ActiveKey.Length > 0)
@@ -131,16 +141,41 @@ namespace ArmanProject
             }
         }
 
+
+        /// <summary>
+        /// Обработка заполнения Имени
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SubNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (ActiveKey.Length > 0)
             {
                 if (gData.ContainsKey(ActiveKey))
                 {
-                    gData[ActiveKey].Discript = SubNameTextBox.Text;
+                    gData[ActiveKey].SubName = SubNameTextBox.Text;
                     Console.WriteLine("SubNameTextBox entire: {0}", SubNameTextBox.Text);
                 }
             }
+        }
+
+        private void ValueVisibleCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (ActiveKey.Length > 0)
+            {
+                if (gData.ContainsKey(ActiveKey))
+                {
+                    gData[ActiveKey].value_visible = (bool)ValueVisibleCheckBox.IsChecked;
+                    Console.WriteLine("SubNameTextBox entire: {0}", SubNameTextBox.Text);
+                }
+            }
+        }
+
+        private void MakeJsonButton_Click(object sender, RoutedEventArgs e)
+        {
+            string json = JsonConvert.SerializeObject(gData, Formatting.Indented);
+
+            Console.WriteLine(json);
         }
     }
 }
