@@ -171,16 +171,28 @@ namespace ArmanProject
                 }
             }
         }
-
+        /// <summary>
+        /// Запись данных с формы в формате json в файл
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MakeJsonButton_Click(object sender, RoutedEventArgs e)
         {
+            /*=========Formating data to json=========*/
             List<asd> events = new List<asd>();
 
             foreach(SubscriberData entry in gData.Values)
             {
                 Subscriber _subscriber = new Subscriber();
                 _subscriber.number = entry.SubNumber;
-                _subscriber.name = entry.SubName;
+                if (entry.SubName == null)
+                {
+                    _subscriber.name = "num " + entry.SubNumber;
+                }
+                else
+                {
+                    _subscriber.name = entry.SubName;
+                }
 
                 Key _key = new Key();
                 _key.value = Convert.ToInt32(entry.value_key);
@@ -190,13 +202,30 @@ namespace ArmanProject
                 _asd.subscriber = _subscriber;
                 _asd.key = _key;
                 _asd.id = Convert.ToInt32(entry.eventId);
-                _asd.description = entry.Discript;
+                if (entry.Discript == null)
+                {
+                    _asd.description = "some description #" + entry.eventId ;
+                }
+                else
+                {
+                    _asd.description = entry.Discript;
+                }
 
                 events.Add(_asd);
+
+                
             }
 
-            string json = JsonConvert.SerializeObject(events, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(new { events } , Formatting.Indented);
             Console.WriteLine(json);
+            
+            /*=========Writing to file========*/
+
+            using (StreamWriter sw = new StreamWriter(pathToJsonFile, false, System.Text.Encoding.Default))
+            {
+                sw.WriteLine(json);
+                sw.Close();
+            }
         }
 
         struct Subscriber
