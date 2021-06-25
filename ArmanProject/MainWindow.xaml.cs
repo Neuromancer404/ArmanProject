@@ -41,6 +41,7 @@ namespace ArmanProject
             gData = new Dictionary<string, SubscriberData>();
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -63,6 +64,7 @@ namespace ArmanProject
             atStart();
             SetListBoxSelect();
         }
+
 
         /// <summary>
         /// Установка выделения на первый элемент listbox
@@ -160,6 +162,12 @@ namespace ArmanProject
             }
         }
 
+
+        /// <summary>
+        /// Запись в gData значения visible
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ValueVisibleCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             if (ActiveKey.Length > 0)
@@ -171,6 +179,8 @@ namespace ArmanProject
                 }
             }
         }
+
+
         /// <summary>
         /// Запись данных с формы в формате json в файл
         /// </summary>
@@ -218,8 +228,8 @@ namespace ArmanProject
 
             string json = JsonConvert.SerializeObject(new { events } , Formatting.Indented);
             Console.WriteLine(json);
-            
-            /*=========Writing to file========*/
+
+            /*=========Writing to file=========*/
 
             using (StreamWriter sw = new StreamWriter(pathToJsonFile, false, System.Text.Encoding.Default))
             {

@@ -63,12 +63,13 @@ namespace ArmanProject
         /// <param name="e"></param>
         private void selectFilePath_Click(object sender, RoutedEventArgs e)
         {
+            string p = pathToParameterFilesFolder;
             pathToParameterFilesFolder = getPath();
-            pathToFilePAR.Text = pathToParameterFilesFolder;
 
             string[] name = System.IO.Directory.GetFiles(pathToParameterFilesFolder, "*.par");
             if (name.Length == 0)
             {
+
                 System.Windows.Forms.MessageBox.Show(
                     "В выбранной папке отстутсвуют файлы с подходящим расширением (.par)",
                     "Ошибка",
@@ -76,8 +77,12 @@ namespace ArmanProject
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1,
                     System.Windows.Forms.MessageBoxOptions.DefaultDesktopOnly);
+
+                pathToParameterFilesFolder = p;
             }
-        }
+            pathToFilePAR.Text = pathToParameterFilesFolder;
+
+         }
 
 
         /// <summary>

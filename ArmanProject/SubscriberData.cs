@@ -17,7 +17,4 @@ namespace ArmanProject
         public bool value_visible;
         public string eventId;
     }
-
-
-
 }
