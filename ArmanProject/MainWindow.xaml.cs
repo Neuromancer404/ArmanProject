@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -173,9 +174,50 @@ namespace ArmanProject
 
         private void MakeJsonButton_Click(object sender, RoutedEventArgs e)
         {
-            string json = JsonConvert.SerializeObject(gData, Formatting.Indented);
+            List<asd> events = new List<asd>();
 
+            foreach(SubscriberData entry in gData.Values)
+            {
+                Subscriber _subscriber = new Subscriber();
+                _subscriber.number = entry.SubNumber;
+                _subscriber.name = entry.SubName;
+
+                Key _key = new Key();
+                _key.value = Convert.ToInt32(entry.value_key);
+                _key.visible = entry.value_visible;
+
+                asd _asd = new asd();
+                _asd.subscriber = _subscriber;
+                _asd.key = _key;
+                _asd.id = Convert.ToInt32(entry.eventId);
+                _asd.description = entry.Discript;
+
+                events.Add(_asd);
+            }
+
+            string json = JsonConvert.SerializeObject(events, Formatting.Indented);
             Console.WriteLine(json);
+        }
+
+        struct Subscriber
+        {
+            public string number;
+            public string name;
+        }
+
+        struct Key
+        {
+            public int value;
+            public bool visible;
+        }
+
+        struct asd
+        {
+            public Subscriber subscriber;
+            public Key key;
+            public int id;
+            public string description;
         }
     }
 }
+

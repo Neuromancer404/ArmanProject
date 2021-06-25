@@ -113,11 +113,11 @@ namespace ArmanProject
             }
         }
 
-
         private string getPath()
         {
             FolderBrowserDialog _folderBrowserDialog = new FolderBrowserDialog();
             _folderBrowserDialog.ShowNewFolderButton = true;
+            DialogResult result = _folderBrowserDialog.ShowDialog();
             return _folderBrowserDialog.SelectedPath;
         }
 
