@@ -66,6 +66,17 @@ namespace ArmanProject
             ListBoxFilling();
         }
 
+
+        private void jsonReading()
+        { 
+            
+        }
+
+        /// <summary>
+        /// Проверка существования файла(ов) .par
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         private string[] FileExtensionCheking(string path)
         {
             string[] pathToParFiles = System.IO.Directory.GetFiles(path, "*.par");
@@ -73,6 +84,11 @@ namespace ArmanProject
             return pathToParFiles;
         }
 
+
+        /// <summary>
+        /// Формирование ключа из файла для gData
+        /// </summary>
+        /// <param name="path"></param>
         public void parseFile(string path)
         {
             string[] lines = File.ReadAllLines(path);
@@ -99,6 +115,12 @@ namespace ArmanProject
         }
 
 
+        /// <summary>
+        /// Проверка наличия ивента в строке
+        /// </summary>
+        /// <param name="parameterData"></param>
+        /// <param name="_subscriberData"></param>
+        /// <returns></returns>
         private bool checkEvent(string parameterData, SubscriberData _subscriberData)
         {
             if (parameterData.Contains("eventrecv"))

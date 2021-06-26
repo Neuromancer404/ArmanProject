@@ -107,6 +107,38 @@ namespace ArmanProject
             atStart();
             SetListBoxSelect();
 
+            if (File.Exists(pathToJsonFile))
+            {
+                string jsonPath;
+                using (StreamReader sr = new StreamReader(pathToJsonFile))
+                {
+                    jsonPath = sr.ReadToEnd();
+                    sr.Close();
+                }
+                JObject jsonObj = JObject.Parse(jsonPath);
+                
+                //Распарсить и сгенерировать ключ здесь
+                //Распарсить и сгенерировать ключ здесь
+                
+                //Dictionary<string, object> dictObj = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonPath);
+                //var a = JsonConvert.DeserializeObject(jsonObj);
+                //Dictionary<string, SubscriberData> container;
+
+
+
+
+                foreach (string key in dictObj.Keys)
+                {
+                    //gData.Add(key, dictObj[key]);
+                    Console.WriteLine("========={0}", dictObj.Keys);
+                    Console.WriteLine("========================");
+                    Console.WriteLine(jsonObj);
+                    
+                }
+
+                foreach (string key in gData.Keys)
+                { Console.WriteLine(gData[key]); }
+            }
 
         }
 

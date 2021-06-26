@@ -75,8 +75,7 @@ namespace ArmanProject
                     "Ошибка",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
-                    MessageBoxDefaultButton.Button1,
-                    System.Windows.Forms.MessageBoxOptions.DefaultDesktopOnly);
+                    MessageBoxDefaultButton.Button1);
 
                 pathToParameterFilesFolder = p;
             }
