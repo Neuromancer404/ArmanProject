@@ -15,8 +15,6 @@ namespace ArmanProject
             foreach (KeyValuePair<string, SubscriberData> item in gData)
             {
                 KeySelectionListBox.Items.Add(item.Key);
-                //Console.WriteLine("--------Listbox fill-----------");
-                //Console.WriteLine("{0}", item.Key);
             }
         }
 

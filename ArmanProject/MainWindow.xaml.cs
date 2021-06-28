@@ -43,7 +43,7 @@ namespace ArmanProject
 
 
         /// <summary>
-        /// 
+        /// Открывает окно настроек с выбором пути
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -65,18 +65,6 @@ namespace ArmanProject
             updateData();
         }
 
-
-        /// <summary>
-        /// Установка выделения на первый элемент listbox
-        /// </summary>
-        private void SetListBoxSelect()
-        {
-            if (KeySelectionListBox.Items.Count > 0)
-            {
-                KeySelectionListBox.SelectedIndex = 0;
-
-            }
-        }
 
         /// <summary>
         /// Проверка наличия конфигурационного файла
@@ -109,6 +97,9 @@ namespace ArmanProject
         }
 
 
+        /// <summary>
+        /// Обновляет данные на форме
+        /// </summary>
         private void updateData()
         {
             //need clear gdata
@@ -122,7 +113,7 @@ namespace ArmanProject
             }
             atStart();
             ListBoxFilling();
-            SetListBoxSelect();
+            KeySelectionListBox.SelectedIndex = 0;
         }
 
 
@@ -143,7 +134,7 @@ namespace ArmanProject
         }
 
         /// <summary>
-        /// 
+        /// Проверка корректности json файла и запись данных из него в gData
         /// </summary>
         private void readJson()
         {
@@ -212,7 +203,7 @@ namespace ArmanProject
         }
 
         /// <summary>
-        /// Обработка заполнения описания
+        /// Обработка заполнения описания на форме
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -230,7 +221,7 @@ namespace ArmanProject
 
 
         /// <summary>
-        /// Обработка заполнения Имени
+        /// Обработка заполнения Имени абонента
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -340,6 +331,32 @@ namespace ArmanProject
             public Key key;
             public int id;
             public string description;
+        }
+
+        /// <summary>
+        /// Устанавливает выделение в Multiple режим
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            KeySelectionListBox.SelectionMode = System.Windows.Controls.SelectionMode.Multiple;
+        }
+
+
+        /// <summary>
+        /// Удаление выделенных элементов Listbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var i in KeySelectionListBox.SelectedItems)
+            {
+                gData.Remove(i.ToString());
+            }
+            KeySelectionListBox.Items.Clear();
+            ListBoxFilling();
         }
     }
 }
