@@ -13,8 +13,8 @@ namespace ArmanProject
         public string SubNumber;
         public string SubName;
         public string Discript;
-        public string value_key;
+        public int value_key;
         public bool value_visible;
-        public string eventId;
+        public int eventId;
     }
 }

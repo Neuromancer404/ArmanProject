@@ -15,8 +15,8 @@ namespace ArmanProject
             foreach (KeyValuePair<string, SubscriberData> item in gData)
             {
                 KeySelectionListBox.Items.Add(item.Key);
-                Console.WriteLine("--------Listbox fill-----------");
-                Console.WriteLine("{0}", item.Key);
+                //Console.WriteLine("--------Listbox fill-----------");
+                //Console.WriteLine("{0}", item.Key);
             }
         }
 
@@ -51,25 +51,10 @@ namespace ArmanProject
                 return;
             }
 
-            gData.Clear();
-
             foreach (string pathToFile in filesName)
             {
                 parseFile(pathToFile);
             }
-
-            foreach (KeyValuePair<string, SubscriberData> kvp in gData)
-            {
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value.eventId);
-            }
-
-            ListBoxFilling();
-        }
-
-
-        private void jsonReading()
-        { 
-            
         }
 
         /// <summary>
@@ -106,8 +91,12 @@ namespace ArmanProject
                     if (checkEvent(par, sd))
                     {
                         sd.SubNumber = sub;
-                        string key = sd.SubNumber + "_" + sd.eventId + "_" + sd.value_key;
-                        Console.WriteLine(key);
+                        string key = sd.SubNumber + "_" + sd.eventId.ToString() + "_" + sd.value_key.ToString();
+                        if (gData.ContainsKey(key))
+                        {
+                            Console.WriteLine("key exist = {0}", key);
+                            continue;
+                        }
                         gData.Add(key, sd);
                     }
                 }
@@ -125,8 +114,8 @@ namespace ArmanProject
         {
             if (parameterData.Contains("eventrecv"))
             {
-                _subscriberData.value_key = getButton(parameterData);
-                _subscriberData.eventId = getEvent(parameterData);
+                _subscriberData.value_key = Convert.ToInt32(getButton(parameterData));
+                _subscriberData.eventId = Convert.ToInt32(getEvent(parameterData));
                 return true;
             }
 
@@ -139,7 +128,7 @@ namespace ArmanProject
             string str = par.Substring(6, par.Length - 6);
             int a = str.IndexOf(":");
             str = str.Substring(0, a);
-            Console.WriteLine("button number = {0}", str);
+            //Console.WriteLine("button number = {0}", str);
 
             return str;
         }
@@ -156,11 +145,11 @@ namespace ArmanProject
 
 
             container = str.Split('|', '&');
-            foreach (string str1 in container)
-            {
-                Console.WriteLine("events = {0}", str1);
-            }
-            Console.WriteLine("=============================");
+            //foreach (string str1 in container)
+            //{
+            //    Console.WriteLine("events = {0}", str1);
+            //}
+            //Console.WriteLine("=============================");
 
             return container[0];
 
@@ -176,8 +165,6 @@ namespace ArmanProject
             container = a.Split(':', '@');
 
             retVal = container[1];
-
-            Console.WriteLine("===={0}", retVal);
 
             return retVal;
         }

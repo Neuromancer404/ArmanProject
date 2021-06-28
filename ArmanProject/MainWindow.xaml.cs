@@ -61,8 +61,8 @@ namespace ArmanProject
                 return;
             }
             KeySelectionListBox.Items.Clear();
-            atStart();
-            SetListBoxSelect();
+
+            updateData();
         }
 
 
@@ -104,43 +104,27 @@ namespace ArmanProject
                 Console.WriteLine("Error in path's");
                 return;
             }
-            atStart();
-            SetListBoxSelect();
 
-            if (File.Exists(pathToJsonFile))
-            {
-                string jsonPath;
-                using (StreamReader sr = new StreamReader(pathToJsonFile))
-                {
-                    jsonPath = sr.ReadToEnd();
-                    sr.Close();
-                }
-                JObject jsonObj = JObject.Parse(jsonPath);
-                
-                //Распарсить и сгенерировать ключ здесь
-                //Распарсить и сгенерировать ключ здесь
-                
-                //Dictionary<string, object> dictObj = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonPath);
-                //var a = JsonConvert.DeserializeObject(jsonObj);
-                //Dictionary<string, SubscriberData> container;
-
-
-
-
-                foreach (string key in dictObj.Keys)
-                {
-                    //gData.Add(key, dictObj[key]);
-                    Console.WriteLine("========={0}", dictObj.Keys);
-                    Console.WriteLine("========================");
-                    Console.WriteLine(jsonObj);
-                    
-                }
-
-                foreach (string key in gData.Keys)
-                { Console.WriteLine(gData[key]); }
-            }
-
+            updateData();
         }
+
+
+        private void updateData()
+        {
+            //need clear gdata
+            gData.Clear();
+
+            //read json before read .par files
+            readJson();
+            foreach (KeyValuePair<string, SubscriberData> kvp in gData)
+            {
+                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value.eventId);
+            }
+            atStart();
+            ListBoxFilling();
+            SetListBoxSelect();
+        }
+
 
         /*========== Entering Data in form ==========*/
 
@@ -158,6 +142,46 @@ namespace ArmanProject
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void readJson()
+        {
+            if (File.Exists(pathToJsonFile))
+            {
+                string jsonString = null;
+                using (StreamReader sr = new StreamReader(pathToJsonFile))
+                {
+                    jsonString = sr.ReadToEnd();
+                    sr.Close();
+                    jsonString = jsonString.Remove(0, 15);
+                    jsonString = jsonString.Remove(jsonString.Length - 5);
+                }
+
+                List<asd> lasd = new List<asd>();
+                //todo сделать проверку если json битый или не правильно заполнен или не тот формат или пустой
+                lasd = JsonConvert.DeserializeObject<List<asd>>(jsonString);
+
+                foreach (asd a in lasd)
+                {
+                    string key = a.subscriber.number + "_" + a.id.ToString() + "_" + a.key.value.ToString();
+                    SubscriberData sd = new SubscriberData();
+
+                    if (gData.ContainsKey(key))
+                    {
+                        continue;
+                    }
+
+                    sd.Discript = a.description;
+                    sd.eventId = a.id;
+                    sd.SubName = a.subscriber.name;
+                    sd.SubNumber = a.subscriber.number;
+                    sd.value_key = a.key.value;
+                    sd.value_visible = a.key.visible;
+                    gData.Add(key, sd);
+                }
+            }
+        }
 
         /// <summary>
         /// Обработка заполнения описания
