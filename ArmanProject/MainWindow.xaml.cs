@@ -149,38 +149,66 @@ namespace ArmanProject
         {
             if (File.Exists(pathToJsonFile))
             {
-                string jsonString = null;
-                using (StreamReader sr = new StreamReader(pathToJsonFile))
-                {
-                    jsonString = sr.ReadToEnd();
-                    sr.Close();
-                    jsonString = jsonString.Remove(0, 15);
-                    jsonString = jsonString.Remove(jsonString.Length - 5);
-                }
-
                 List<asd> lasd = new List<asd>();
-                //todo сделать проверку если json битый или не правильно заполнен или не тот формат или пустой
-                lasd = JsonConvert.DeserializeObject<List<asd>>(jsonString);
-
-                foreach (asd a in lasd)
+                string jsonString = null;
+                try
                 {
-                    string key = a.subscriber.number + "_" + a.id.ToString() + "_" + a.key.value.ToString();
-                    SubscriberData sd = new SubscriberData();
-
-                    if (gData.ContainsKey(key))
+                    using (StreamReader sr = new StreamReader(pathToJsonFile))
                     {
-                        continue;
+                        jsonString = sr.ReadToEnd();
+                        sr.Close();
+                        jsonString = jsonString.Remove(0, jsonString.IndexOf('[') - 1);
+                        jsonString = jsonString.Remove(jsonString.IndexOf(']') + 1);
                     }
-
-                    sd.Discript = a.description;
-                    sd.eventId = a.id;
-                    sd.SubName = a.subscriber.name;
-                    sd.SubNumber = a.subscriber.number;
-                    sd.value_key = a.key.value;
-                    sd.value_visible = a.key.visible;
-                    gData.Add(key, sd);
                 }
-            }
+                catch 
+                {
+                    System.Windows.Forms.MessageBox.Show(
+                    "Содержание json файла не читается",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+
+                    return; 
+                }
+                try 
+                {
+                    lasd = JsonConvert.DeserializeObject<List<asd>>(jsonString);
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(
+                    "Имеющийся json файл некорректен и будет перезаписан",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+
+                    return;
+                }
+                finally
+                {
+                    foreach (asd a in lasd)
+                    {
+                        string key = a.subscriber.number + "_" + a.id.ToString() + "_" + a.key.value.ToString();
+                        SubscriberData sd = new SubscriberData();
+
+                        if (gData.ContainsKey(key))
+                        {
+                            continue;
+                        }
+
+                        sd.Discript = a.description;
+                        sd.eventId = a.id;
+                        sd.SubName = a.subscriber.name;
+                        sd.SubNumber = a.subscriber.number;
+                        sd.value_key = a.key.value;
+                        sd.value_visible = a.key.visible;
+                        gData.Add(key, sd);
+                    }
+                }
+                }
         }
 
         /// <summary>
