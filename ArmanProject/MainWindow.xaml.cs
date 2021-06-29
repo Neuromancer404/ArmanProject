@@ -117,11 +117,6 @@ namespace ArmanProject
 
             //read json before read .par files
             readJson();
-/*            foreach (KeyValuePair<string, SubscriberData> kvp in gData)
-            {
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value.eventId);
-                Console.WriteLine("()()))))))))()()()()");
-            }*/
             atStart();
             ListviewFilling();
             //KeyTable.SelectedIndex = 0;
@@ -137,11 +132,7 @@ namespace ArmanProject
         /// <param name="e"></param>
         private void KeySelectionListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (KeyTable.Items.Count > 0)
-            {
-                ActiveKey = KeyTable.SelectedItem.ToString();
-                FormFilling(KeyTable.SelectedItem.ToString());
-            }
+            
         }
 
         /// <summary>
@@ -372,20 +363,40 @@ namespace ArmanProject
             ListviewFilling();
         }
         private void KeyTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {        
+        {                
             keysList = new List<string>();
-            for (int i = 0; i < KeyTable.SelectedItems.Count; i++)
+
+            if (setAnySelections.IsChecked == false)
             {
-                int selectedIndex = KeyTable.Items.IndexOf(KeyTable.SelectedItems[i]);
-                var asd = KeyTable.Items[selectedIndex] as KeyView;
-                if (asd == null)
+                int selectedIndex = 0;
+                selectedIndex = KeyTable.SelectedIndex;
+                try
                 {
-                    return;
+                    var asd = KeyTable.Items[selectedIndex] as KeyView;
+                    string k = asd.SubNumber + "_" + asd.eventId + "_" + asd.value_key;
+                    keysList.Add(k);
+                    ActiveKey = k;
+                    FormFilling(k);
                 }
-                string k = asd.SubNumber + "_" + asd.eventId + "_" + asd.value_key;
-                keysList.Add(k);
+
+                catch { return; }
+            }
+            if (setAnySelections.IsChecked == true)
+            {
+                for (int i = 0; i < KeyTable.SelectedItems.Count; i++)
+                {
+                    int selectedIndex = KeyTable.Items.IndexOf(KeyTable.SelectedItems[i]);
+                    var asd = KeyTable.Items[selectedIndex] as KeyView;
+                    if (asd == null)
+                    {
+                        return;
+                    }
+                    string k = asd.SubNumber + "_" + asd.eventId + "_" + asd.value_key;
+                    keysList.Add(k);
+                }
             }
         }
+
     }
 }
 
