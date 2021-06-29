@@ -13,26 +13,24 @@
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Выбор директории" Name="SettingsButton" HorizontalAlignment="Left" Margin="236,314,0,0" VerticalAlignment="Top" Width="117" Height="23" Click="SettingsButton_Click"/>
+        <Button Content="Выбор директории" Name="SettingsButton" HorizontalAlignment="Left" Margin="339,306,0,0" VerticalAlignment="Top" Width="117" Height="23" Click="SettingsButton_Click"/>
         <Label Content="Выберите ключ:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="99"/>
-        <ListBox Name ="KeySelectionListBox" HorizontalAlignment="Left" Height="296" Margin="10,41,0,0" VerticalAlignment="Top" Width="99" SelectionChanged="KeySelectionListBox_SelectionChanged"/>
-        <Label Content="Номер абонента:" HorizontalAlignment="Left" Margin="127,41,0,0" VerticalAlignment="Top" Height="26" Width="104"/>
-        <Label Content="" Name ="SubNumLabel"  HorizontalAlignment="Left" Margin="236,41,0,0" VerticalAlignment="Top" Height="26" Width="108"/>
-        <Label Content="id события:" HorizontalAlignment="Left" Margin="130,72,0,0" VerticalAlignment="Top" Height="26" Width="72"/>
-        <Label Content="" Name="EventIdLabel" HorizontalAlignment="Left" Margin="236,72,0,0" VerticalAlignment="Top" Height="26" Width="105"/>
-        <Label Content="Номер кнопки:"  HorizontalAlignment="Left" Margin="127,103,0,0" VerticalAlignment="Top" Height="26" Width="93"/>
-        <Label Content="" Name="KeyNumLabel" HorizontalAlignment="Left" Margin="236,103,0,0" VerticalAlignment="Top" Height="26" Width="108"/>
-        <Label Content="Имя абонента:" HorizontalAlignment="Left" Margin="127,134,0,0" VerticalAlignment="Top" Height="26" Width="91"/>
-        <TextBox Name ="SubNameTextBox" HorizontalAlignment="Left" Height="23" Margin="236,137,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="108" TextChanged="SubNameTextBox_TextChanged"/>
-        <Label Content="Описание: " HorizontalAlignment="Left" Margin="127,165,0,0" VerticalAlignment="Top" Height="26" Width="70"/>
-        <TextBox Name="DiscriptTextBox" HorizontalAlignment="Left" Height="23" Margin="236,168,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="108" TextChanged="DiscriptTextBox_TextChanged"/>
-        <Label Content="Видимость: " HorizontalAlignment="Left" Margin="127,196,0,0" VerticalAlignment="Top" Height="26" Width="75"/>
-        <CheckBox Name ="ValueVisibleCheckBox"  Content="" HorizontalAlignment="Left" Margin="236,203,0,0" VerticalAlignment="Top" Height="15" Width="18" Checked="ValueVisibleCheckBox_Checked"/>
-        <Button Name="MakeJsonButton" Content="Создать json" HorizontalAlignment="Left" Margin="236,240,0,0" VerticalAlignment="Top" Width="117" Height="23" Click="MakeJsonButton_Click"/>
-        <CheckBox Name="setAnySelections" Content="Выбрать несколько ключей" HorizontalAlignment="Left" Margin="127,283,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
-        <Button Content="Удалить" HorizontalAlignment="Left" Margin="127,240,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="Button_Click"/>
-        <ListView HorizontalContentAlignment="Center" Name="KeyTable" HorizontalAlignment="Left" Height="295" Margin="412,41,0,15.2" VerticalAlignment="Center" Width="175">
-
+        <Label Content="Номер абонента:" HorizontalAlignment="Left" Margin="230,33,0,0" VerticalAlignment="Top" Height="26" Width="104"/>
+        <Label Content="" Name ="SubNumLabel"  HorizontalAlignment="Left" Margin="339,33,0,0" VerticalAlignment="Top" Height="26" Width="108"/>
+        <Label Content="id события:" HorizontalAlignment="Left" Margin="233,64,0,0" VerticalAlignment="Top" Height="26" Width="72"/>
+        <Label Content="" Name="EventIdLabel" HorizontalAlignment="Left" Margin="339,64,0,0" VerticalAlignment="Top" Height="26" Width="105"/>
+        <Label Content="Номер кнопки:"  HorizontalAlignment="Left" Margin="230,95,0,0" VerticalAlignment="Top" Height="26" Width="93"/>
+        <Label Content="" Name="KeyNumLabel" HorizontalAlignment="Left" Margin="339,95,0,0" VerticalAlignment="Top" Height="26" Width="108"/>
+        <Label Content="Имя абонента:" HorizontalAlignment="Left" Margin="230,126,0,0" VerticalAlignment="Top" Height="26" Width="91"/>
+        <TextBox Name ="SubNameTextBox" HorizontalAlignment="Left" Height="23" Margin="339,129,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="108" TextChanged="SubNameTextBox_TextChanged"/>
+        <Label Content="Описание: " HorizontalAlignment="Left" Margin="230,157,0,0" VerticalAlignment="Top" Height="26" Width="70"/>
+        <TextBox Name="DiscriptTextBox" HorizontalAlignment="Left" Height="23" Margin="339,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="108" TextChanged="DiscriptTextBox_TextChanged"/>
+        <Label Content="Видимость: " HorizontalAlignment="Left" Margin="230,188,0,0" VerticalAlignment="Top" Height="26" Width="75"/>
+        <CheckBox Name ="ValueVisibleCheckBox"  Content="" HorizontalAlignment="Left" Margin="339,195,0,0" VerticalAlignment="Top" Height="15" Width="18" Checked="ValueVisibleCheckBox_Checked"/>
+        <Button Name="MakeJsonButton" Content="Создать json" HorizontalAlignment="Left" Margin="339,232,0,0" VerticalAlignment="Top" Width="117" Height="23" Click="MakeJsonButton_Click"/>
+        <CheckBox Name="setAnySelections" Content="Выбрать несколько ключей" HorizontalAlignment="Left" Margin="230,275,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <Button Content="Удалить" HorizontalAlignment="Left" Margin="230,232,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="Button_Click"/>
+        <ListView HorizontalContentAlignment="Center" Name="KeyTable" HorizontalAlignment="Left" Height="295" Margin="10,36,0,20.2" VerticalAlignment="Center" Width="175" SelectionChanged="KeyTable_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding SubNumber}" Width="60">Абонент</GridViewColumn>

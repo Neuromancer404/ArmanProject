@@ -30,14 +30,14 @@ namespace ArmanProject
         private string pathToJsonFile;
         private Dictionary<string, SubscriberData> gData;
         private string ActiveKey;
+        private List<string> keysList;
+
 
         public MainWindow()
         {
             InitializeComponent();
-
             pathToExe = Directory.GetCurrentDirectory();
             pathToConfFile = pathToExe + "\\ArmanProject.conf";
-
             gData = new Dictionary<string, SubscriberData>();
         }
 
@@ -50,17 +50,27 @@ namespace ArmanProject
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             SettingsWindow settingsWindow = new SettingsWindow(pathToConfFile);
-            settingsWindow.ShowDialog();
-
-            pathToParameterFilesFolder = settingsWindow.PathToParametersFolder;
-            pathToJsonFile = settingsWindow.PathToJsonFile;
+            try 
+            { 
+                settingsWindow.ShowDialog(); 
+            }
+            catch
+            {
+                settingsWindow.Activate(); 
+                pathToParameterFilesFolder = settingsWindow.PathToParametersFolder;
+                pathToJsonFile = settingsWindow.PathToJsonFile;
+            }
+            finally 
+            {
+                pathToParameterFilesFolder = settingsWindow.PathToParametersFolder;
+                pathToJsonFile = settingsWindow.PathToJsonFile;
+            }
 
             if (pathToParameterFilesFolder.Length == 0 || pathToJsonFile.Length == 0)
             {
                 Console.WriteLine("Error in path's: pathToParameterFilesFolder={0}, pathToJsonFile={1}", pathToParameterFilesFolder, pathToJsonFile);
                 return;
             }
-            KeySelectionListBox.Items.Clear();
 
             updateData();
         }
@@ -107,13 +117,14 @@ namespace ArmanProject
 
             //read json before read .par files
             readJson();
-            foreach (KeyValuePair<string, SubscriberData> kvp in gData)
+/*            foreach (KeyValuePair<string, SubscriberData> kvp in gData)
             {
                 Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value.eventId);
-            }
+                Console.WriteLine("()()))))))))()()()()");
+            }*/
             atStart();
-            ListBoxFilling();
-            KeySelectionListBox.SelectedIndex = 0;
+            ListviewFilling();
+            //KeyTable.SelectedIndex = 0;
         }
 
 
@@ -126,10 +137,10 @@ namespace ArmanProject
         /// <param name="e"></param>
         private void KeySelectionListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (KeySelectionListBox.Items.Count > 0)
+            if (KeyTable.Items.Count > 0)
             {
-                ActiveKey = KeySelectionListBox.SelectedItem.ToString();
-                FormFilling(KeySelectionListBox.SelectedItem.ToString());
+                ActiveKey = KeyTable.SelectedItem.ToString();
+                FormFilling(KeyTable.SelectedItem.ToString());
             }
         }
 
@@ -341,7 +352,7 @@ namespace ArmanProject
         /// <param name="e"></param>
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            KeySelectionListBox.SelectionMode = System.Windows.Controls.SelectionMode.Multiple;
+            KeyTable.SelectionMode = System.Windows.Controls.SelectionMode.Multiple;
         }
 
 
@@ -352,12 +363,28 @@ namespace ArmanProject
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var i in KeySelectionListBox.SelectedItems)
+            for (int i = 0; i < keysList.Count; i++)
             {
-                gData.Remove(i.ToString());
+                gData.Remove(keysList[i]);
+                Console.WriteLine("Удалено {0}", keysList[i]);
             }
-            KeySelectionListBox.Items.Clear();
-            ListBoxFilling();
+
+            ListviewFilling();
+        }
+        private void KeyTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {        
+            keysList = new List<string>();
+            for (int i = 0; i < KeyTable.SelectedItems.Count; i++)
+            {
+                int selectedIndex = KeyTable.Items.IndexOf(KeyTable.SelectedItems[i]);
+                var asd = KeyTable.Items[selectedIndex] as KeyView;
+                if (asd == null)
+                {
+                    return;
+                }
+                string k = asd.SubNumber + "_" + asd.eventId + "_" + asd.value_key;
+                keysList.Add(k);
+            }
         }
     }
 }

@@ -10,20 +10,18 @@ namespace ArmanProject
         public string SubNumber { get; set; }
         public int eventId { get; set; }
         public int value_key { get; set; }
-    } 
+    }
 
     public partial class MainWindow
     {
         /// <summary>
         /// Заполнение Listbox на форме
         /// </summary>
-        private void ListBoxFilling()
+        private void ListviewFilling()
         {
             List<KeyView> lvi = new List<KeyView>();
-            
             foreach (KeyValuePair<string, SubscriberData> item in gData)
             {
-                KeySelectionListBox.Items.Add(item.Key);
                 lvi.Add(new KeyView() { SubNumber = item.Value.SubNumber, eventId = item.Value.eventId, value_key = item.Value.value_key });
             }
             KeyTable.ItemsSource = lvi;
@@ -87,7 +85,7 @@ namespace ArmanProject
         {
             string[] lines = File.ReadAllLines(path);
             string sub = "";
-
+            string key;
             foreach (string par in lines)
             {
                 if (par.Contains("par11"))
@@ -100,7 +98,8 @@ namespace ArmanProject
                     if (checkEvent(par, sd))
                     {
                         sd.SubNumber = sub;
-                        string key = sd.SubNumber + "_" + sd.eventId.ToString() + "_" + sd.value_key.ToString();
+                        
+                        key = sd.SubNumber + "_" + sd.eventId.ToString() + "_" + sd.value_key.ToString();
                         if (gData.ContainsKey(key))
                         {
                             Console.WriteLine("key exist = {0}", key);
@@ -127,7 +126,6 @@ namespace ArmanProject
                 _subscriberData.eventId = Convert.ToInt32(getEvent(parameterData));
                 return true;
             }
-
             return false;
         }
 
@@ -137,31 +135,18 @@ namespace ArmanProject
             string str = par.Substring(6, par.Length - 6);
             int a = str.IndexOf(":");
             str = str.Substring(0, a);
-            //Console.WriteLine("button number = {0}", str);
-
             return str;
         }
 
         private string getEvent(string par)
         {
             string[] container;
-
             int b = par.IndexOf("\"");
             string str = par.Substring(b + 1);
-
             b = str.IndexOf("\"");
             str = str.Substring(0, b);
-
-
             container = str.Split('|', '&');
-            //foreach (string str1 in container)
-            //{
-            //    Console.WriteLine("events = {0}", str1);
-            //}
-            //Console.WriteLine("=============================");
-
             return container[0];
-
         }
 
         private string getSub(string parameterData)
