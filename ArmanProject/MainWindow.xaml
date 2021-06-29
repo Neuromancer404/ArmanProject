@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArmanProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="380.4" Width="386" Loaded="Window_Loaded">
+        Title="MainWindow" Height="380.4" Width="610.313" Loaded="Window_Loaded">
     <Grid Margin="0,0,3.2,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="750*"/>
@@ -31,6 +31,21 @@
         <Button Name="MakeJsonButton" Content="Создать json" HorizontalAlignment="Left" Margin="236,240,0,0" VerticalAlignment="Top" Width="117" Height="23" Click="MakeJsonButton_Click"/>
         <CheckBox Name="setAnySelections" Content="Выбрать несколько ключей" HorizontalAlignment="Left" Margin="127,283,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
         <Button Content="Удалить" HorizontalAlignment="Left" Margin="127,240,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="Button_Click"/>
+        <ListView HorizontalContentAlignment="Center" Name="KeyTable" HorizontalAlignment="Left" Height="295" Margin="412,41,0,15.2" VerticalAlignment="Center" Width="175">
+
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding SubNumber}" Width="60">Абонент</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding eventId}" Width="50">event id</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding value_key}" Width="60">Кнопка</GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <ListView.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </ListView.Resources>
+        </ListView>
 
     </Grid>
 </Window>

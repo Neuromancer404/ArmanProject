@@ -5,6 +5,13 @@ using System.Windows.Controls;
 
 namespace ArmanProject
 {
+    public class KeyView
+    {
+        public string SubNumber { get; set; }
+        public int eventId { get; set; }
+        public int value_key { get; set; }
+    } 
+
     public partial class MainWindow
     {
         /// <summary>
@@ -12,10 +19,14 @@ namespace ArmanProject
         /// </summary>
         private void ListBoxFilling()
         {
+            List<KeyView> lvi = new List<KeyView>();
+            
             foreach (KeyValuePair<string, SubscriberData> item in gData)
             {
                 KeySelectionListBox.Items.Add(item.Key);
+                lvi.Add(new KeyView() { SubNumber = item.Value.SubNumber, eventId = item.Value.eventId, value_key = item.Value.value_key });
             }
+            KeyTable.ItemsSource = lvi;
         }
 
 

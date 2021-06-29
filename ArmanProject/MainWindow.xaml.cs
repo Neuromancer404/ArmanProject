@@ -167,7 +167,7 @@ namespace ArmanProject
                 {
                     lasd = JsonConvert.DeserializeObject<List<asd>>(jsonString);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     System.Windows.Forms.MessageBox.Show(
                     "Имеющийся json файл некорректен и будет перезаписан",
@@ -253,6 +253,7 @@ namespace ArmanProject
                     Console.WriteLine("SubNameTextBox entire: {0}", SubNameTextBox.Text);
                 }
             }
+            ValueVisibleCheckBox.IsChecked = (bool)gData[ActiveKey].value_visible;
         }
 
 
