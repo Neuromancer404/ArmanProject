@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArmanProject"
         mc:Ignorable="d"
-        Title="SettingsWindow" Height="145.26" Width="575" Closing="Window_Closing">
+        Title="Выбор пути" Height="145.26" Width="575" Closing="Window_Closing">
     <Grid Loaded="Grid_Loaded" Margin="0,0,-0.2,-19">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="332*"/>

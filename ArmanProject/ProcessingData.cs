@@ -40,7 +40,6 @@ namespace ArmanProject
             SubNameTextBox.Text = gData[key].SubName;
             DiscriptTextBox.Text = gData[key].Discript;
             ValueVisibleCheckBox.IsChecked = gData[key].value_visible;
-            Console.WriteLine("gData value writing");
         }
 
 
@@ -49,12 +48,9 @@ namespace ArmanProject
         /// </summary>
         private void atStart()
         {
-            Console.WriteLine("atStart starting");
-
             string[] filesName = FileExtensionCheking(pathToParameterFilesFolder);
             if (filesName.Length == 0)
             {
-                Console.WriteLine("Error: no .par in {0}", pathToParameterFilesFolder);
                 return;
             }
 
@@ -102,7 +98,6 @@ namespace ArmanProject
                         key = sd.SubNumber + "_" + sd.eventId.ToString() + "_" + sd.value_key.ToString();
                         if (gData.ContainsKey(key))
                         {
-                            Console.WriteLine("key exist = {0}", key);
                             continue;
                         }
                         gData.Add(key, sd);

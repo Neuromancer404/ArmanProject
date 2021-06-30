@@ -68,7 +68,6 @@ namespace ArmanProject
 
             if (pathToParameterFilesFolder.Length == 0 || pathToJsonFile.Length == 0)
             {
-                Console.WriteLine("Error in path's: pathToParameterFilesFolder={0}, pathToJsonFile={1}", pathToParameterFilesFolder, pathToJsonFile);
                 return;
             }
 
@@ -85,7 +84,6 @@ namespace ArmanProject
         {
             if (!File.Exists(pathToConfFile))
             {
-                Console.WriteLine("Error ArmanProject.conf dosent exist");
                 return;
             }
             string[] lines = File.ReadAllLines(pathToConfFile);
@@ -99,7 +97,6 @@ namespace ArmanProject
             }
             if (pathToParameterFilesFolder.Length == 0 || pathToJsonFile.Length == 0)
             {
-                Console.WriteLine("Error in path's");
                 return;
             }
 
@@ -124,16 +121,6 @@ namespace ArmanProject
 
 
         /*========== Entering Data in form ==========*/
-
-        /// <summary>
-        /// При выборе значения из ListBox вызывает метод заполнения формы
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void KeySelectionListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
 
         /// <summary>
         /// Проверка корректности json файла и запись данных из него в gData
@@ -216,7 +203,6 @@ namespace ArmanProject
                 if (gData.ContainsKey(ActiveKey))
                 {
                     gData[ActiveKey].Discript = DiscriptTextBox.Text;
-                    Console.WriteLine("DiscriptTextBox entire: {0}", DiscriptTextBox.Text);
                 }
             }
         }
@@ -234,7 +220,6 @@ namespace ArmanProject
                 if (gData.ContainsKey(ActiveKey))
                 {
                     gData[ActiveKey].SubName = SubNameTextBox.Text;
-                    Console.WriteLine("SubNameTextBox entire: {0}", SubNameTextBox.Text);
                 }
             }
         }
@@ -252,7 +237,6 @@ namespace ArmanProject
                 if (gData.ContainsKey(ActiveKey))
                 {
                     gData[ActiveKey].value_visible = (bool)ValueVisibleCheckBox.IsChecked;
-                    Console.WriteLine("SubNameTextBox entire: {0}", SubNameTextBox.Text);
                 }
             }
             ValueVisibleCheckBox.IsChecked = (bool)gData[ActiveKey].value_visible;
@@ -305,7 +289,6 @@ namespace ArmanProject
             }
 
             string json = JsonConvert.SerializeObject(new { events } , Formatting.Indented);
-            Console.WriteLine(json);
 
             /*=========Writing to file=========*/
 
@@ -343,7 +326,8 @@ namespace ArmanProject
         /// <param name="e"></param>
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            KeyTable.SelectionMode = System.Windows.Controls.SelectionMode.Multiple;
+
+
         }
 
 
@@ -354,49 +338,87 @@ namespace ArmanProject
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < keysList.Count; i++)
-            {
-                gData.Remove(keysList[i]);
-                Console.WriteLine("Удалено {0}", keysList[i]);
-            }
-
-            ListviewFilling();
-        }
-        private void KeyTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {                
             keysList = new List<string>();
 
             if (setAnySelections.IsChecked == false)
             {
-                int selectedIndex = 0;
-                selectedIndex = KeyTable.SelectedIndex;
                 try
                 {
-                    var asd = KeyTable.Items[selectedIndex] as KeyView;
-                    string k = asd.SubNumber + "_" + asd.eventId + "_" + asd.value_key;
-                    keysList.Add(k);
-                    ActiveKey = k;
-                    FormFilling(k);
-                }
-
-                catch { return; }
-            }
-            if (setAnySelections.IsChecked == true)
-            {
-                for (int i = 0; i < KeyTable.SelectedItems.Count; i++)
-                {
-                    int selectedIndex = KeyTable.Items.IndexOf(KeyTable.SelectedItems[i]);
-                    var asd = KeyTable.Items[selectedIndex] as KeyView;
-                    if (asd == null)
+                    for (int i = 0; i < KeyTable.SelectedItems.Count; i++)
                     {
-                        return;
+                        int selectedIndex = KeyTable.Items.IndexOf(KeyTable.SelectedItems[i]);
+                        var asd = KeyTable.Items[selectedIndex] as KeyView;
+                        if (asd == null)
+                        {
+                            return;
+                        }
+                        string k = asd.SubNumber + "_" + asd.eventId + "_" + asd.value_key;
+                        keysList.Add(k);
                     }
-                    string k = asd.SubNumber + "_" + asd.eventId + "_" + asd.value_key;
-                    keysList.Add(k);
+                }
+                catch
+                {
+                    return;
                 }
             }
+            bool flag = false;
+            if (setAnySelections.IsChecked == true)//not selected items
+            {
+                for (int i = 0; i < KeyTable.Items.Count; i++)
+                {
+                    var asd = KeyTable.Items[i] as KeyView;
+                    flag = false;
+                    for (int j = 0; j < KeyTable.SelectedItems.Count; j++)
+                    {
+                        var aaa = KeyTable.SelectedItems[j] as KeyView;
+                        if (asd == aaa)
+                        {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if(!flag)
+                    {
+                        string k = asd.SubNumber + "_" + asd.eventId + "_" + asd.value_key;
+                        keysList.Add(k);
+                    }
+                }
+            }
+
+            for (int i = 0; i < keysList.Count; i++)
+            {
+                gData.Remove(keysList[i]);
+            }
+
+            ListviewFilling();
         }
 
+        private void KeyTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int selectedIndex = 0;
+            selectedIndex = KeyTable.SelectedIndex;
+            try
+            {
+                var asd = KeyTable.Items[selectedIndex] as KeyView;
+                string k = asd.SubNumber + "_" + asd.eventId + "_" + asd.value_key;
+                ActiveKey = k;
+                FormFilling(k);
+            }
+
+            catch { return; }
+        }
+
+        private void setAnySelections_Click(object sender, RoutedEventArgs e)
+        {
+            if (setAnySelections.IsChecked == true)
+            {
+                DeleteButton.Content = "Удалить невыбранное";
+            }
+            else
+            {
+                DeleteButton.Content = "Удалить выбранное";
+            }
+        }
     }
 }
 

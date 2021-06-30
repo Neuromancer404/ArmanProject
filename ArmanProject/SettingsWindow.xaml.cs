@@ -92,7 +92,6 @@ namespace ArmanProject
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             pathToJsonFile = getPath() + "\\eventsConfig.json";
-            Console.WriteLine(pathToJsonFile);
             pathToFileJSON.Text = pathToJsonFile;
         }
 
